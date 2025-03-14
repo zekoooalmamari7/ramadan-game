@@ -1,24 +1,49 @@
-let userName = '';
-let randomNumber = Math.floor(Math.random() * 100) + 1;
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة رمضان</title>
+</head>
+<body>
+    <div>
+        <label for="name-input">أدخل اسمك:</label>
+        <input type="text" id="name-input">
+        <button onclick="submitName()">إرسال</button>
+    </div>
+    <div id="user-name" style="display:none;"></div>
+    <div id="game-area" style="display:none;">
+        <label for="guess">أدخل تخمينك:</label>
+        <input type="number" id="guess">
+        <button onclick="checkGuess()">تحقق</button>
+        <div id="message"></div>
+    </div>
 
-function submitName() {
-    userName = document.getElementById('name-input').value;
-    if (userName) {
-        document.getElementById('user-name').innerText = `مرحبًا، ${userName}!`;
-        document.getElementById('user-name').style.display = 'block';
-        document.getElementById('game-area').style.display = 'block';
-    }
-}
+    <script>
+        let userName = '';
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
 
-function checkGuess() {
-    const guess = parseInt(document.getElementById('guess').value);
-    const messageElement = document.getElementById('message');
-    if (guess === randomNumber) {
-        messageElement.innerText = 'تهانينا! لقد خمنت الرقم الصحيح!';
-        messageElement.style.color = '#4CAF50';
-    } else if (guess < randomNumber) {
-        messageElement.innerText = 'الرقم أكبر من تخمينك. حاول مرة أخرى!';
-    } else {
-        messageElement.innerText = 'الرقم أصغر من تخمينك. حاول مرة أخرى!';
-    }
-}
+        function submitName() {
+            userName = document.getElementById('name-input').value;
+            if (userName) {
+                document.getElementById('user-name').innerText = `مرحبًا، ${userName}!`;
+                document.getElementById('user-name').style.display = 'block';
+                document.getElementById('game-area').style.display = 'block';
+            }
+        }
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess').value);
+            const messageElement = document.getElementById('message');
+            if (guess === randomNumber) {
+                messageElement.innerText = 'تهانينا! لقد خمنت الرقم الصحيح!';
+                messageElement.style.color = '#4CAF50';
+            } else if (guess < randomNumber) {
+                messageElement.innerText = 'الرقم أكبر من تخمينك. حاول مرة أخرى!';
+            } else {
+                messageElement.innerText = 'الرقم أصغر من تخمينك. حاول مرة أخرى!';
+            }
+        }
+    </script>
+</body>
+</html>
