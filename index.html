@@ -1,80 +1,24 @@
-<!DOCTYPE html>  
-<html lang="ar">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>لعبة تخمين الرقم</title>  
-    <style>  
-        body {  
-            font-family: Arial, sans-serif;   
-            text-align: center;   
-            background-color: #f0f4f8; /* لون خلفية لطيف */  
-            color: #333; /* لون النص */  
-            padding: 20px;  
-        }  
-        h1 {  
-            color: #4CAF50; /* لون العنوان */  
-            font-size: 36px; /* حجم كبير للعنوان */  
-        }  
-        p {  
-            font-size: 20px; /* حجم أكبر للنصوص */  
-        }  
-        #name-input {  
-            padding: 10px;  
-            font-size: 18px; /* حجم خط أكبر لحقل الإدخال */  
-            border: 2px solid #4CAF50; /* لون حدود مميز */  
-            border-radius: 5px; /* زوايا مدورة */  
-        }  
-        button {  
-            padding: 10px 20px;  
-            font-size: 18px; /* حجم خط أكبر للأزرار */  
-            background-color: #4CAF50; /* لون زر */  
-            color: white; /* لون خط الزر */  
-            border: none; /* إزالة الحدود */  
-            border-radius: 5px; /* زوايا مدورة */  
-            cursor: pointer; /* إظهار مؤشر اليد عند المرور فوق الزر */  
-            margin: 10px;  
-        }  
-        button:hover {  
-            background-color: #45a049; /* تغيير اللون عند التمرير */  
-        }  
-        #user-name {  
-            text-align: left;   
-            margin-left: 20px;   
-            font-size: 24px; /* حجم خط أكبر للاسم */  
-            margin-top: 20px;  
-        }  
-        #game-area {  
-            margin-top: 30px; /* مسافة بين القسمين */  
-        }  
-        input[type="number"] {  
-            padding: 10px;  
-            font-size: 18px; /* حجم خط أكبر لحقل الإدخال للأعداد */  
-            border: 2px solid #4CAF50; /* لون حدود مميز */  
-            border-radius: 5px; /* زوايا مدورة */  
-        }  
-        #message {  
-            font-size: 22px; /* حجم أكبر لرسائل اللعبة */  
-            color: #d9534f; /* لون الرسائل */  
-        }  
-    </style>  
-</head>  
-<body>  
-    <h1>رمضان يجمعنا</h1>  
-    <p>اكتب اسمك للبدء:</p>  
-    <input type="text" id="name-input" placeholder="اكتب اسمك هنا" />  
-    <button onclick="submitName()">إدخال الاسم</button>  
-    
-    <div id="user-name" style="display: none;"></div> <!-- لعرض الاسم -->  
+let userName = '';
+let randomNumber = Math.floor(Math.random() * 100) + 1;
 
-    <div id="game-area" style="display: none;">  
-        <p>لعبة تخمين الرقم</p>  
-        <p>اختر رقمًا بين 1 و 100</p>  
-        <input type="number" id="guess" />  
-        <button onclick="checkGuess()">تخمين</button>  
-        <p id="message"></p>  
-    </div>  
+function submitName() {
+    userName = document.getElementById('name-input').value;
+    if (userName) {
+        document.getElementById('user-name').innerText = `مرحبًا، ${userName}!`;
+        document.getElementById('user-name').style.display = 'block';
+        document.getElementById('game-area').style.display = 'block';
+    }
+}
 
-    <script src="script.js"></script>  
-</body>  
-</html>  
+function checkGuess() {
+    const guess = parseInt(document.getElementById('guess').value);
+    const messageElement = document.getElementById('message');
+    if (guess === randomNumber) {
+        messageElement.innerText = 'تهانينا! لقد خمنت الرقم الصحيح!';
+        messageElement.style.color = '#4CAF50';
+    } else if (guess < randomNumber) {
+        messageElement.innerText = 'الرقم أكبر من تخمينك. حاول مرة أخرى!';
+    } else {
+        messageElement.innerText = 'الرقم أصغر من تخمينك. حاول مرة أخرى!';
+    }
+}
